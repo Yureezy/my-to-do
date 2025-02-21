@@ -16,6 +16,7 @@ export default function AppNavigator() {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
+        // Définir les icônes pour chaque onglet
         tabBarIcon: ({ color, size }) => {
           let iconName;
           if (route.name === 'Menu') iconName = 'home-outline';

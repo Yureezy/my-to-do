@@ -13,7 +13,7 @@ import {
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useTheme } from '../context/ThemeContext';
 
-// Utilisation des paramètres par défaut au lieu de defaultProps
+// Utilisation des paramètres par défaut 
 export default function HomeScreen({ 
   tasks = [], 
   setTasks = () => {}, 
@@ -56,19 +56,19 @@ export default function HomeScreen({
       setModalVisible(false);
     }
   };
-
+//Archivage de la tâche
   const archiveTask = (id) => {
     const taskToArchive = tasks.find(task => task.id === id);
     setArchivedTasks([...archivedTasks, taskToArchive]);
     setTasks(tasks.filter(task => task.id !== id));
   };
-
+//Basculer la tâche entre complétée et non complétée
   const toggleCompletion = (id) => {
     setTasks(tasks.map(task => 
       task.id === id ? { ...task, completed: !task.completed } : task
     ));
   };
-
+//Modifier la tâche
   const startEdit = (task) => {
     setNewTask(task.text);
     setTaskDescription(task.description);
@@ -77,7 +77,7 @@ export default function HomeScreen({
     setCurrentTask(task);
     setModalVisible(true);
   };
-
+//Ouvrir la fenêtre modale pour une nouvelle tâche
   const openModalForNewTask = () => {
     setNewTask('');
     setTaskDescription('');
@@ -86,7 +86,7 @@ export default function HomeScreen({
     setCurrentTask(null);
     setModalVisible(true);
   };
-
+//Obtenir la couleur de la difficulté
   const getDifficultyColor = (difficulty) => {
     switch(difficulty) {
       case 'Court': return '#90EE90';
@@ -95,7 +95,7 @@ export default function HomeScreen({
       default: return '#FFFFFF';
     }
   };
-
+//Gestion de la date
   const handleDateChange = (event, selectedDate) => {
     setShowDatePicker(Platform.OS === 'ios');
     if (selectedDate) {
@@ -105,7 +105,7 @@ export default function HomeScreen({
 
   const renderDatePicker = () => {
     if (!showDatePicker) return null;
-
+//Affichage du sélecteur de date
     return (
       <DateTimePicker
         testID="dateTimePicker"
@@ -113,7 +113,7 @@ export default function HomeScreen({
         mode="date"
         display={Platform.OS === 'ios' ? 'spinner' : 'default'}
         onChange={handleDateChange}
-        // Suppression de l'utilisation de defaultProps, utilisation de valeurs directes
+        // Limiter la date minimale à la date actuelle
         minimumDate={new Date()}
         textColor="#000000"
       />
